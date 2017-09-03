@@ -7,16 +7,39 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"
             asp-fallback-src="~/lib/angular/angular.min.js"></script>
-    <link rel="stylesheet/scss" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.scss" 
-            asp-fallback-href="~/lib/angular-material/angular-material.scss" />
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.css" 
+            asp-fallback-href="~/lib/angular-material/angular-material.css" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 </head>
-<body>
+<body ng-app="MainApp" layout-fill layout="column" ng-cloak>
+    <div layout="row" flex>
+        <md-sidenav class="md-sidenav-left"
+                    md-component-id="left"
+                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-whiteframe="4">
 
+            <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">Gustavo Parreira</h1>
+            </md-toolbar>
+            <md-content layout-padding>
+                <p hide show-gt-md>
+                    This is where the page links will appear.
+                </p>
+            </md-content>
 
-    <div ng-app>
-        @RenderBody()
+        </md-sidenav>
+
+        <md-content class="md-padding">
+            This is the content.
+        </md-content>
     </div>
+    @*<md-nav-bar md-selected-nav-item="page1"
+                nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-click="goto('page1')" name="page1">Page One</md-nav-item>
+        <md-nav-item md-nav-click="goto('page2')" name="page2">Page Two</md-nav-item>
+        <md-nav-item md-nav-click="goto('page3')" name="page3">Page Three</md-nav-item>
+    </md-nav-bar*@
+    @RenderBody()
 
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js"
