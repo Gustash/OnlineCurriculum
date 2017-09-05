@@ -34,3 +34,8 @@ md-nav-bar {
 md-toolbar .md-menu.nav-toolbar-menu {
     margin: auto 0;
 }
+
+.md-whiteframe-3dp,
+.md-whiteframe-3dp > * {
+    background-color: white;
+}

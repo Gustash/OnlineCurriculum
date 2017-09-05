@@ -20,5 +20,11 @@
     "inputFiles": [
       "wwwroot/css/material-icons.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/css/roboto.min.css",
+    "inputFiles": [
+      "wwwroot/css/roboto.css"
+    ]
   }
 ]

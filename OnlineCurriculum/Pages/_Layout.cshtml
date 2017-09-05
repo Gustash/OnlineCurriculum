@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="~/css/site.min.css" asp-append-version="true" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"
             asp-fallback-href="~/css/material-icons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic"
+            asp-fallback-href="~/css/roboto.min.css">
 </head>
 <body ng-app="MainApp" layout-fill layout="column" ng-cloak>
     <div ng-controller="AppCtrl" layout="row" flex>
@@ -24,7 +26,7 @@
                 <h1 class="md-toolbar-tools">Gustavo Parreira</h1>
             </md-toolbar>
             <md-content layout-padding>
-                <p hide show-gt-md>
+                <p>
                     This is where the page links will appear.
                 </p>
             </md-content>
@@ -45,11 +47,10 @@
             </md-toolbar>
 
             <md-content class="md-padding">
-                This is the content.
+                @RenderBody()
             </md-content>
         </div>
     </div>
-    @RenderBody()
 
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.min.js"
