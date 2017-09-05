@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net;
+using System.IO;
+using System.Text;
 
 namespace OnlineCurriculum.Pages
 {
@@ -13,7 +16,17 @@ namespace OnlineCurriculum.Pages
     {
         public void OnGet()
         {
-            string data = System.IO.File.ReadAllText(@"wwwroot/data/main-content.json");
+            string data = "";
+            string JSONUrl = "https://www.jasonbase.com/things/2MJm.json";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(JSONUrl);
+            request.ContentType = "application/json; charset=utf-8";
+            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+            using (Stream responseStream = response.GetResponseStream())
+            {
+                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                data = reader.ReadToEnd();
+            }
+
             JObject content = JObject.Parse(data);
             foreach (var header in content)
             {
