@@ -9,6 +9,8 @@ using Newtonsoft.Json.Linq;
 using System.Net;
 using System.IO;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 namespace OnlineCurriculum.Pages
 {
@@ -16,29 +18,61 @@ namespace OnlineCurriculum.Pages
     {
         public void OnGet()
         {
-            string data = "";
-            string JSONUrl = "https://www.jasonbase.com/things/2MJm.json";
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(JSONUrl);
-            request.ContentType = "application/json; charset=utf-8";
-            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-            using (Stream responseStream = response.GetResponseStream())
+            ViewData["test"] = "This is a test";
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+            IConfigurationRoot configuration = builder.Build();
+
+            string data = GetOnlineJSONData(configuration);
+            JObject content = JObject.Parse(data);
+
+            List<Category> categories = new List<Category>();
+
+            foreach (var categoryData in content)
             {
-                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                data = reader.ReadToEnd();
+                Category category = new Category();
+                category.Title = categoryData.Key;
+
+                foreach (var value in categoryData.Value)
+                {
+                    CategoryContent categoryContent = new CategoryContent();
+                    categoryContent.Title = value["Title"].Value<string>();
+                    categoryContent.Description = value["Description"].Value<string>();
+                    category.Content.Add(categoryContent);
+                }
+                categories.Add(category);
             }
 
-            JObject content = JObject.Parse(data);
-            foreach (var header in content)
+            ViewData["Categories"] = categories;
+        }
+
+        string GetOnlineJSONData(IConfigurationRoot configuration)
+        {
+            string JSONUrl = configuration["Data:URL"];
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(JSONUrl);
+            request.ContentType = "application/json; charset=utf-8";
+            try
             {
-                string headerTitle = header.Key;
-                foreach (var headerContent in header.Value)
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                using (Stream responseStream = response.GetResponseStream())
                 {
-                    string title = headerContent["Title"].Value<string>();
-                    string description = headerContent["Description"].Value<string>();
-                    Console.WriteLine("Title: " + title);
-                    Console.WriteLine("Desc: " + description);
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    return reader.ReadToEnd();
                 }
             }
+            catch
+            {
+                return GetOfflineJSONData(configuration);
+            }
+        }
+
+        string GetOfflineJSONData(IConfigurationRoot configuration)
+        {
+            string fallbackURL = configuration["Data:Fallback"];
+            StreamReader reader = new StreamReader(fallbackURL, Encoding.UTF8);
+            return reader.ReadToEnd();
         }
     }
 }
