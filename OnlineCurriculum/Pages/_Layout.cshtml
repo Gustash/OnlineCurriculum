@@ -9,13 +9,15 @@
             asp-fallback-src="~/lib/angular/angular.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.css" 
             asp-fallback-href="~/lib/angular-material/angular-material.css" />
-    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="~/css/site.min.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            asp-fallback-href="~/css/material-icons.min.css">
 </head>
 <body ng-app="MainApp" layout-fill layout="column" ng-cloak>
-    <div layout="row" flex>
+    <div ng-controller="AppCtrl" layout="row" flex>
         <md-sidenav class="md-sidenav-left"
-                    md-component-id="left"
-                    md-is-locked-open="$mdMedia('gt-md')"
+                    md-component-id="sidenav"
+                    md-is-locked-open="$mdMedia('gt-sm')"
                     md-whiteframe="4">
 
             <md-toolbar class="md-theme-indigo">
@@ -29,16 +31,24 @@
 
         </md-sidenav>
 
-        <md-content class="md-padding">
-            This is the content.
-        </md-content>
+        <div layout="column" class="content-container">
+            <md-toolbar class="md-theme-indigo" layout="row">
+                <md-menu hide-gt-sm layout="row" layout-align="start center" class="nav-toolbar-menu">
+                    <!-- Trigger element is a md-button with an icon -->
+                    <md-button ng-click="toggleSidenav()" class="md-icon-button" aria-label="Open sample menu">
+                        <md-icon>menu</md-icon>
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item><md-button ng-click="alert('Hello!')">Do Something</md-button></md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </md-toolbar>
+
+            <md-content class="md-padding">
+                This is the content.
+            </md-content>
+        </div>
     </div>
-    @*<md-nav-bar md-selected-nav-item="page1"
-                nav-bar-aria-label="navigation links">
-        <md-nav-item md-nav-click="goto('page1')" name="page1">Page One</md-nav-item>
-        <md-nav-item md-nav-click="goto('page2')" name="page2">Page Two</md-nav-item>
-        <md-nav-item md-nav-click="goto('page3')" name="page3">Page Three</md-nav-item>
-    </md-nav-bar*@
     @RenderBody()
 
     <script src="~/js/site.min.js" asp-append-version="true"></script>

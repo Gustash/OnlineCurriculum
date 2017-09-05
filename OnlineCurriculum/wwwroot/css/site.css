@@ -10,3 +10,13 @@ body {
 md-sidenav {
   width: 260px; }
 
+md-nav-bar {
+  height: 49px;
+  width: 100%; }
+
+.content-container {
+  width: 100%; }
+
+md-toolbar .md-menu.nav-toolbar-menu {
+  margin: auto 0; }
+
