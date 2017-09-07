@@ -7,14 +7,14 @@
 <div layout-gt-md="row" layout-gt-xs="column">
     @foreach (var category in ViewData["Categories"] as List<Category>)
     {
-        <div md-whiteframe="3" layout-margin flex-gt-md="70">       
+        <div flex-gt-md="70">       
                 <md-content layout-padding>
                     <p class="md-display-2">
                         @category.Title
                     </p>
                     @foreach (var content in category.Content)
                     {
-                        <div md-whiteframe="6" layout-margin layout-padding>
+                        <div md-whiteframe="3" layout-margin layout-padding>
                             <p class="md-display-1">
                                 @content.Title
                             </p>
@@ -27,14 +27,4 @@
             
         </div>
     }
-    <div md-whiteframe="3" layout-margin flex>
-        <md-content layout-padding layout-margin>
-            <p class="md-display-1">
-                Eirmod dolores feugait tempor autem eum gubergren kasd amet amet
-            </p>
-            <p class="md-body-1">
-                Ipsum no sit ipsum sanctus diam dolores stet nisl sed nihil eum autem te lorem nisl erat et et consetetur
-            </p>
-        </md-content>
-    </div>
-    </div>
+</div>
