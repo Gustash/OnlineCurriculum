@@ -11,59 +11,69 @@
             asp-fallback-href="~/lib/angular-material/angular-material.css" />
     <link rel="stylesheet" type="text/css" href="~/css/site.min.css" asp-append-version="true" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            asp-fallback-href="~/css/material-icons.min.css">
+            asp-fallback-href="~/css/material-icons.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic"
-            asp-fallback-href="~/css/roboto.min.css">
+            asp-fallback-href="~/css/roboto.min.css" />
+    <link rel="stylesheet" href="~/lib/monosocialiconsfont/monosocialiconsfont.css" />
 </head>
-<body ng-app="MainApp" layout-fill layout="column" ng-cloak>
-    <div ng-controller="AppCtrl" layout="row" flex>
-        <md-sidenav class="md-sidenav-left"
-                    md-component-id="sidenav"
-                    md-is-locked-open="$mdMedia('gt-sm')"
-                    md-whiteframe="4">
+<body ng-app="MainApp" layout="column" ng-cloak>
+    <div ng-controller="AppCtrl" class="content-container" layout="column" flex>
+        <md-toolbar class="md-theme-indigo" md-whiteframe="4">
+            <div layout="row" layout-align="start center" flex>
+                <md-button ng-click="toggleSidenav()" class="md-icon-button" aria-label="Open sample menu">
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <h1 class="md-toolbar-tools" layout-fill>Gustavo Parreira</h1>
+                <md-button ng-click="toggleRightnav()" class="md-icon-button" aria-label="Open sample menu" hide-gt-md>
+                    <md-icon>info</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
 
-            <md-toolbar class="md-theme-indigo">
-                <h1 class="md-toolbar-tools">Gustavo Parreira</h1>
-            </md-toolbar>
-            <md-content layout-padding>
-                <p>
-                    This is where the page links will appear.
-                </p>
-            </md-content>
+        <div layout="row">
+            <div layout="column">
+                <md-sidenav class="md-sidenav-left"
+                            layout-fill
+                            md-component-id="sidenav"
+                            md-is-locked-open="$mdMedia('gt-sm')"
+                            md-whiteframe="4">
+                    <md-toolbar class="md-theme-indigo" md-whiteframe="4" hide-gt-sm></md-toolbar>
+                    <md-content layout-padding>
+                        @if (ViewData["Categories"] != null)
+                        {
+                            <div layout="column">
+                                @foreach (Category category in ViewData["Categories"] as List<Category>)
+                                {
+                                    <p>@category.Title</p>
+                                }
+                            </div>
+                        }
+                    </md-content>
+                </md-sidenav>
+            </div>
 
-        </md-sidenav>
+            <div flex>
+                <md-content class="md-padding">
+                    @RenderBody()
+                </md-content>
+            </div>
 
-        <div layout="column" class="content-container">
-            <md-toolbar class="md-theme-indigo" layout="row">
-                <md-menu hide-gt-sm layout="row" layout-align="start center" class="nav-toolbar-menu">
-                    <!-- Trigger element is a md-button with an icon -->
-                    <md-button ng-click="toggleSidenav()" class="md-icon-button" aria-label="Open sample menu">
-                        <md-icon>menu</md-icon>
-                    </md-button>
-                    <md-menu-content>
-                        <md-menu-item><md-button ng-click="alert('Hello!')">Do Something</md-button></md-menu-item>
-                    </md-menu-content>
-                </md-menu>
-            </md-toolbar>
-
-            <md-content class="md-padding">
-                @RenderBody()
-            </md-content>
+            <md-sidenav class="md-sidenav-right"
+                        md-component-id="sidenav-info"
+                        md-whiteframe="4"
+                        hide-gt-md>
+                <md-toolbar class="md-theme-indigo" md-whiteframe="4"></md-toolbar>
+                <md-content layout="column">
+                    @{ Html.RenderPartial("_InfoSidenav"); }
+                </md-content>
+            </md-sidenav>
         </div>
-        <md-sidenav class="md-sidenav-right"
-                    md-component-id="sidenav-info"
-                    md-is-locked-open="$mdMedia('gt-sm')"
-                    md-whiteframe="3">
-            <md-toolbar class="md-theme-indigo" layout="row"></md-toolbar>
-            <md-content layout-padding>
-                <p class="md-display-1">
-                    Eirmod dolores feugait tempor autem eum gubergren kasd amet amet
-                </p>
-                <p class="md-body-1">
-                    Ipsum no sit ipsum sanctus diam dolores stet nisl sed nihil eum autem te lorem nisl erat et et consetetur
-                </p>
-            </md-content>
-        </md-sidenav>
+
+        @*<footer>
+            <md-toolbar>
+                Footer
+            </md-toolbar>
+        </footer>*@
     </div>
 
     <script src="~/js/site.min.js" asp-append-version="true"></script>

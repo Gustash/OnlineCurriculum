@@ -4,27 +4,29 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div layout-gt-md="row" layout-gt-xs="column">
-    @foreach (var category in ViewData["Categories"] as List<Category>)
-    {
-        <div flex-gt-md="70">       
-                <md-content layout-padding>
-                    <p class="md-display-2">
-                        @category.Title
-                    </p>
-                    @foreach (var content in category.Content)
-                    {
-                        <div md-whiteframe="3" layout-margin layout-padding>
-                            <p class="md-display-1">
-                                @content.Title
-                            </p>
-                            <p class="md-body-1">
-                                @content.Description
-                            </p>
-                        </div>
-                    }
-                </md-content>
-            
-        </div>
-    }
+<div layout="row">
+    <div layout="column" flex>
+        @foreach (var category in ViewData["Categories"] as List<Category>)
+        {
+            <div layout-padding>
+                <p class="md-display-2">
+                    @category.Title
+                </p>
+                @foreach (var content in category.Content)
+                {
+                    <div md-whiteframe="3" layout-margin layout-padding>
+                        <p class="md-display-1">
+                            @content.Title
+                        </p>
+                        <p class="md-body-1">
+                            @content.Description
+                        </p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    <div hide-xs hide-sm hide-md flex-gt-md="35">
+        @{ Html.RenderPartial("_InfoSidenav"); }
+    </div>
 </div>

@@ -7,18 +7,18 @@ $primary-text-color: #212121;
 $secondary-text-color: #757575;
 $divider-color: #BDBDBD;
 
+$background-color: rgb(250, 250, 250);
+
 * {
     padding: 0;
     margin: 0;
 }
 
-html,
 body {
-    width: 100%;
-    height: 100%;
+    height: auto;
 }
 
-md-sidenav-left {
+.md-sidenav-left {
     width: 260px;
 }
 
@@ -38,4 +38,9 @@ md-toolbar .md-menu.nav-toolbar-menu {
 .md-whiteframe-3dp,
 .md-whiteframe-3dp > * {
     background-color: white;
+}
+
+.md-sidenav-right,
+.md-sidenav-right md-content {
+    background-color: $background-color;
 }

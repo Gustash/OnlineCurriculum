@@ -1,0 +1,28 @@
+{
+  "name": "monosocialiconsfont",
+  "keywords": [],
+  "homepage": "http://drinchev.github.io/monosocialiconsfont/",
+  "license": [
+    "OFL-1.1"
+  ],
+  "main": [
+    "./monosocialiconsfont.css",
+    "./MonoSocialIconsFont*"
+  ],
+  "ignore": [
+    "sample project",
+    "*.md"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "_release": "c7cd1df232",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "c7cd1df23270ea3dca80cced55dc9717df74cdc3"
+  },
+  "_source": "https://github.com/drinchev/monosocialiconsfont.git",
+  "_target": "*",
+  "_originalSource": "monosocialiconsfont",
+  "_direct": true
+}

@@ -3,7 +3,8 @@
   "private": true,
   "dependencies": {
     "angular": "v1.6.4-build.5317+sha.0c3620b",
-    "angular-material": "v1.1.4"
+    "angular-material": "v1.1.4",
+    "monosocialiconsfont": "*"
   },
   "resolutions": {
     "angular": "1.6.5"
